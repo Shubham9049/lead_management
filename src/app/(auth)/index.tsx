@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from "react-native";
 import { router } from "expo-router";
 import * as WebBrowser from "expo-web-browser";
-import { LinearGradient } from "expo-linear-gradient";
+const { width, height } = Dimensions.get("window");
 
 export const useWarmUpBrowser = () => {
   React.useEffect(() => {
@@ -19,97 +19,108 @@ const index = () => {
   useWarmUpBrowser();
 
   return (
-    <LinearGradient colors={["#16222A", "#3A6073"]} style={styles.container}>
-      <View style={styles.imageContainer}>
-        <Image
-          source={require("../../assets/images/logo.png")}
-          style={styles.image}
-        />
-      </View>
-      <View style={styles.content}>
-        <Text style={styles.title}>UNIFY</Text>
+    <View style={styles.container}>
+      {/* Top Image */}
+      <Image
+        source={require("../../assets/images/house.png")} // Replace with actual image
+        style={styles.backgroundImage}
+      />
+
+      {/* Content Section */}
+      <View style={styles.contentContainer}>
+        <Text style={styles.HeadTitle}>UNIFY</Text>
+        <Text style={styles.title}>Perfect choice for your future</Text>
         <Text style={styles.subtitle}>
-          Unify your connections, simplify your workflow, and collaborate
-          seamlessly.
+          Our properties are the masterpiece for every client with lasting value.
         </Text>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={() => router.replace("/(auth)/loginScreen")}>
-          <LinearGradient
-            colors={["#16222A", "#3A6073","gray"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.loginButton}
-          >
-            <Text style={styles.buttonText}>LOGIN</Text>
-          </LinearGradient>
+
+        {/* Continue Button */}
+        <TouchableOpacity
+          onPress={() => router.replace("/(auth)/loginScreen")}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
 
-        
+        {/* Floating Icon Button */}
+        {/* <TouchableOpacity style={styles.floatingButton}>
+          <Text style={styles.floatingButtonText}>G</Text>
+        </TouchableOpacity> */}
       </View>
-    </LinearGradient>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1F3B8C",
-    alignItems: "center",
+    backgroundColor: "#F8F8F8",
   },
-  imageContainer: {
+  backgroundImage: {
     width: "100%",
-    height: "50%",
-    justifyContent: "center",
-    alignItems: "center",
+    height: "68%",
+    // resizeMode: "cover",
   },
-  image: {
-    width: "60%",
-    height: "60%",
-    resizeMode: "cover",
-  },
-  content: {
+  contentContainer: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    backgroundColor: "white",
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+    padding: 25,
     alignItems: "center",
-    marginTop: -40,
-    paddingHorizontal: 20,
+    elevation: 5, // Shadow effect
+    gap:10
+  },
+  HeadTitle:{
+    fontSize: 25,
+    fontWeight: "bold",
+    color: "#333",
+    textAlign: "center",
   },
   title: {
-    fontSize: 28,
+    fontSize: 18,
     fontWeight: "bold",
-    color: "white",
-    marginBottom: 5,
+    color: "#333",
+    textAlign: "center",
   },
   subtitle: {
-    fontSize: 16,
-    color: "white",
+    fontSize: 14,
+    color: "#666",
     textAlign: "center",
-    marginBottom: 30,
-    paddingHorizontal: 40,
+    marginVertical: 10,
   },
-  buttonContainer: {
-    width: "100%",
-    marginTop: 80,
-    alignItems: "center",
-  },
-  loginButton: {
-    width: 300,
-    paddingVertical: 14,
-    borderRadius: 25,
+  button: {
+    backgroundColor: "#D17A47",
+    paddingVertical: 12,
+    paddingHorizontal: 50,
+    borderRadius: 30,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 15,
-  },
-  signupButton: {
-    width: 300,
-    paddingVertical: 14,
-    borderRadius: 25,
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: 20,
+    width: width * 0.75,
   },
   buttonText: {
     color: "white",
     fontWeight: "bold",
     fontSize: 16,
+  },
+  floatingButton: {
+    position: "absolute",
+    bottom: 20,
+    right: 20,
+    backgroundColor: "#567A5D",
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  floatingButtonText: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
   },
 });
 

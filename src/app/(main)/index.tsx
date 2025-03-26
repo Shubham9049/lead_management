@@ -70,7 +70,7 @@ export default function App() {
   ];
 
   return (
-    <LinearGradient colors={["#16222A", "#3A6073"]} style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Image source={require("../../assets/images/logo.png")} style={styles.logo} />
         <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}>
@@ -87,25 +87,25 @@ export default function App() {
       <ScrollView contentContainerStyle={styles.sectionContainer}>
         {sections.map((section, index) => (
           <TouchableOpacity key={index} style={styles.section} onPress={() => router.push(`/(main)/${section.route}` as any)}>
-            <LinearGradient colors={["#4b6cb7", "#182848"]} style={styles.iconCircle}>
-              <Icon name={section.icon} size={32} color="#fff" />
-            </LinearGradient>
+            <View style={styles.iconCircle}>
+              <Icon name={section.icon} size={32} color="#000" />
+            </View>
             <Text style={styles.sectionText}>{section.name}</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: { flex: 1, backgroundColor: "#FFFFFF" },
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     padding: 15,
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#C2C2C3",
     borderRadius: 15,
     marginHorizontal: 10,
     marginTop: 15,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     width: 45,
     height: 45,
     borderRadius: 22.5,
-    backgroundColor: "#FFD700",
+    backgroundColor: "#D17A47",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -127,6 +127,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 15,
     paddingTop: 30,
+    gap:10
   },
   section: { alignItems: "center", width: "40%", marginVertical: 15 },
   iconCircle: {
@@ -135,10 +136,13 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#C2C2C3",
     elevation: 8,
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.7,
     shadowRadius: 5,
   },
-  sectionText: { marginTop: 10, fontSize: 14, fontWeight: "600", color: "#fff" },
-});
+  sectionText: { marginTop: 10, fontSize: 14, fontWeight: "600", color: "#000" },
+}
+
+);

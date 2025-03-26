@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: "#FFB100",
+    backgroundColor: "#D17A47",
     justifyContent: "center",
     alignItems: "center",
     marginBottom: 10,
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   },
   icon: { marginRight: 10, color: "#2196F3" },
   logoutIcon: {
-    color: "#f44336",
+    color: "#D17A47",
   },
   logoutButton: {
     paddingVertical: 10,
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     marginTop: "auto", // Pushes logout button to the bottom
   },
   logoutText: {
-    color: "#f44336",
+    color: "#D17A47",
     fontWeight: "bold",
     marginLeft: 10,
     fontSize: 18,

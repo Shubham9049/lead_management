@@ -76,8 +76,8 @@ const loginScreen = () => {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-          <LinearGradient colors={["#16222A", "#3A6073"]} style={styles.container}>
-            {/* Top Section with Illustration */}
+          <LinearGradient colors={["#FFFFFF", "#FFFFFF"]} style={styles.container}>
+            {/* Top Section with Logo */}
             <View style={styles.topContainer}>
               <Image
                 source={require("../../assets/images/logo.png")}
@@ -85,19 +85,14 @@ const loginScreen = () => {
               />
             </View>
 
-            {/* Login Content */}
+            {/* Login Form */}
             <View style={styles.content}>
               <Text style={styles.title}>Welcome Back</Text>
               <Text style={styles.subtitle}>Login to your account</Text>
 
-              {/* Username Field with Gradient */}
-              <LinearGradient
-                colors={["#9ba5bd", "#7487b5"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.inputContainer}
-              >
-                <Ionicons name="mail-outline" size={20} color="white" />
+              {/* Email Field */}
+              <View style={styles.inputContainer}>
+                <Ionicons name="mail-outline" size={20} color="#333" />
                 <TextInput
                   placeholder="Email"
                   style={styles.input}
@@ -105,54 +100,36 @@ const loginScreen = () => {
                   autoCapitalize="none"
                   value={empid}
                   onChangeText={setEmpid}
-                  placeholderTextColor="rgba(255,255,255,0.7)"
+                  placeholderTextColor="#888"
                 />
-              </LinearGradient>
-              
-              {/* Password Field with Gradient */}
-              <LinearGradient
-                colors={["#9ba5bd", "#7487b5"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 0 }}
-                style={styles.inputContainer}
-              >
-                <Ionicons name="lock-closed-outline" size={20} color="white" />
+              </View>
+
+              {/* Password Field */}
+              <View style={styles.inputContainer}>
+                <Ionicons name="lock-closed-outline" size={20} color="#333" />
                 <TextInput
                   placeholder="Password"
                   style={styles.input}
                   secureTextEntry={!passwordVisible}
                   value={password}
                   onChangeText={setPassword}
-                  placeholderTextColor="rgba(255,255,255,0.7)"
+                  placeholderTextColor="#888"
                 />
-                <TouchableOpacity
-                  onPress={() => setPasswordVisible(!passwordVisible)}
-                >
-                  <Ionicons
-                    name={passwordVisible ? "eye-off-outline" : "eye-outline"}
-                    size={20}
-                    color="white"
-                  />
+                <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
+                  <Ionicons name={passwordVisible ? "eye-off-outline" : "eye-outline"} size={20} color="#333" />
                 </TouchableOpacity>
-              </LinearGradient>
-             
+              </View>
 
-              {/* Login Button with Gradient */}
-              <TouchableOpacity onPress={handleLogin}>
-                <LinearGradient
-                  colors={["#16222A", "#3A6073","gray"]}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 0 }}
-                  style={styles.loginButton}
-                >
-                  {loading ? (
-                    <ActivityIndicator size="small" color="#FFFFFF" />
-                  ) : (
-                    <Text style={styles.buttonText}>LOGIN</Text>
-                  )}
-                </LinearGradient>
+              {/* Login Button */}
+              <TouchableOpacity onPress={handleLogin} style={styles.loginButton}>
+                {loading ? (
+                  <ActivityIndicator size="small" color="#FFFFFF" />
+                ) : (
+                  <Text style={styles.buttonText}>LOGIN</Text>
+                )}
               </TouchableOpacity>
 
+              
             </View>
           </LinearGradient>
         </ScrollView>
@@ -164,38 +141,38 @@ const loginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#1F3B8C",
     alignItems: "center",
+    backgroundColor: "#FFFFFF",
   },
   topContainer: {
     width: "100%",
-    height: height * 0.25,
-    backgroundColor: "#3A6073",
-    borderBottomLeftRadius: "50%",
-    borderBottomRightRadius: "50%",
+    height: height * 0.30,
+    backgroundColor: "#FFFFFF",
+    // borderBottomLeftRadius: 80,
+    // borderBottomRightRadius: 80,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 80,
+    marginBottom: 60,
   },
   topImage: {
     width: "100%",
     height: "100%",
     resizeMode: "contain",
+    marginTop: 75
   },
   content: {
     width: width * 0.85,
     alignItems: "center",
-    marginTop: -20,
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "white",
+    color: "#333",
     marginBottom: 5,
   },
   subtitle: {
     fontSize: 16,
-    color: "white",
+    color: "#555",
     marginBottom: 20,
   },
   inputContainer: {
@@ -203,28 +180,39 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     paddingHorizontal: 15,
-    paddingVertical: 8,
+    paddingVertical: 10,
     borderRadius: 10,
     marginBottom: 15,
+    backgroundColor: "#F0F0F0",
   },
   input: {
     flex: 1,
     marginLeft: 10,
-    color: "white",
+    color: "#333",
   },
   loginButton: {
+    backgroundColor: "#D17A47",
     paddingVertical: 14,
-    paddingHorizontal: 20,
     borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 20,
+    marginTop: 10,
     width: width * 0.85,
   },
   buttonText: {
     color: "white",
     fontWeight: "bold",
     fontSize: 16,
+  },
+  footerLinks: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: width * 0.85,
+    marginTop: 15,
+  },
+  footerText: {
+    color: "#666",
+    fontSize: 14,
   },
 
 });
