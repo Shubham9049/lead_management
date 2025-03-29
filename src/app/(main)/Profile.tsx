@@ -40,7 +40,7 @@ export default function Profile() {
   const profileInitial = userName.charAt(0).toUpperCase();
 
   return (
-    <LinearGradient colors={["#16222A", "#3A6073"]} style={styles.container}>
+    <View style={styles.container}>
       {/* Profile Image */}
       <View style={styles.imageContainer}>
         {displayImage ? (
@@ -58,7 +58,7 @@ export default function Profile() {
       {/* User Info */}
       <Text style={styles.userName}>{userName}</Text>
       <Text style={styles.userEmail}>{userEmail}</Text>
-    </LinearGradient>
+    </View>
   );
 }
 
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#1E1E1E", // Your primary background color
+    backgroundColor: "white", // Your primary background color
     paddingHorizontal: 20,
     justifyContent: "flex-start",
     paddingTop: height * 0.05, // Adjust top padding dynamically
@@ -105,12 +105,12 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#FFF",
+    color: "#000",
     marginTop: 10,
   },
   userEmail: {
     fontSize: 16,
-    color: "#BBB", // Light grey for better contrast
+    color: "#bbb", // Light grey for better contrast
     marginTop: 5,
   },
 });

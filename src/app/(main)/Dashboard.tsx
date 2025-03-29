@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { LinearGradient } from "expo-linear-gradient";
 
 const Dashboard = () => {
   const [totalLeads, setTotalLeads] = useState(0);
@@ -21,18 +20,18 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <LinearGradient colors={["#0F172A", "#1E293B"]} style={styles.container}>
-      <Text style={styles.title}> Dashboard</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Dashboard</Text>
 
       {loading ? (
-        <ActivityIndicator size="large" color="#FACC15" style={styles.loader} />
+        <ActivityIndicator size="large" color="#D17A47" style={styles.loader} />
       ) : (
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Total Leads</Text>
           <Text style={styles.count}>{totalLeads}</Text>
         </View>
       )}
-    </LinearGradient>
+    </View>
   );
 };
 
@@ -43,11 +42,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     paddingTop: 40,
+    backgroundColor: "#FFFFFF", // White background
   },
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#FACC15",
+    color: "#333", // Dark text for contrast
     textAlign: "center",
     marginBottom: 20,
     textTransform: "uppercase",
@@ -56,19 +56,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   card: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#F8F8F8", // Soft grey card for contrast
     padding: 20,
     borderRadius: 12,
     alignItems: "center",
-    shadowColor: "#FACC15",
+    shadowColor: "#999",
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 6,
-    elevation: 6,
+    shadowOpacity: 0.3,
+    shadowRadius: 5,
+    elevation: 5,
   },
   cardTitle: {
     fontSize: 18,
-    color: "#FACC15",
+    color: "#555", // Dark grey for readability
     fontWeight: "bold",
     marginBottom: 10,
     textTransform: "uppercase",
@@ -76,9 +76,9 @@ const styles = StyleSheet.create({
   count: {
     fontSize: 38,
     fontWeight: "bold",
-    color: "#FACC15",
-    textShadowColor: "rgba(250, 204, 21, 0.75)",
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 5,
+    color: "#D17A47", // Warm orange for highlight
+    textShadowColor: "rgba(209, 122, 71, 0.5)",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 3,
   },
 });

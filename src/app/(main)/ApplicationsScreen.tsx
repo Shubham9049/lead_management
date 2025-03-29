@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { LinearGradient } from "expo-linear-gradient";
 
 const ApplicationsScreen = () => {
   const [students, setStudents] = useState([]);
@@ -18,14 +17,14 @@ const ApplicationsScreen = () => {
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 50; // Number of items per page
+  const itemsPerPage = 50;
 
   useEffect(() => {
     axios
       .get("https://app.bigwigmedia.in/StudentsApi.php")
       .then((response) => {
         const verifiedStudents = response.data.filter(
-          (student: { Status: string }) => student.Status === "Verified"
+          (student: { Status: string; }) => student.Status === "Verified"
         );
         setStudents(verifiedStudents);
         setFilteredStudents(verifiedStudents);
@@ -37,7 +36,6 @@ const ApplicationsScreen = () => {
       });
   }, []);
 
-  // Search Filter
   useEffect(() => {
     const filtered = students.filter((student) =>
       Object.values(student)
@@ -46,10 +44,9 @@ const ApplicationsScreen = () => {
         .includes(searchText.toLowerCase())
     );
     setFilteredStudents(filtered);
-    setCurrentPage(1); // Reset to page 1 when searching
+    setCurrentPage(1);
   }, [searchText, students]);
 
-  // Pagination Logic
   const totalPages = Math.ceil(filteredStudents.length / itemsPerPage);
   const paginatedData = filteredStudents.slice(
     (currentPage - 1) * itemsPerPage,
@@ -57,27 +54,25 @@ const ApplicationsScreen = () => {
   );
 
   return (
-    <LinearGradient colors={["#0F172A", "#1E293B"]} style={styles.container}>
-      <Text style={styles.title}>Student Verified Applications</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Verified Applicants</Text>
 
-      {/* Search Input */}
       <TextInput
         style={styles.searchInput}
         placeholder="Search"
-        placeholderTextColor="#ccc"
+        placeholderTextColor="#888"
         value={searchText}
         onChangeText={setSearchText}
       />
 
       {loading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#FACC15" />
+          <ActivityIndicator size="large" color="#1E293B" />
         </View>
       ) : (
         <>
           <ScrollView horizontal>
             <View>
-              {/* Table Header */}
               <View style={[styles.row, styles.header]}>
                 <Text style={styles.headerText}>ID</Text>
                 <Text style={styles.headerText}>Name</Text>
@@ -91,7 +86,6 @@ const ApplicationsScreen = () => {
                 <Text style={styles.headerText}>Programme</Text>
               </View>
 
-              {/* Table Data */}
               <FlatList
                 data={paginatedData}
                 keyExtractor={(item) => item["Student ID"]}
@@ -118,7 +112,6 @@ const ApplicationsScreen = () => {
             </View>
           </ScrollView>
 
-          {/* Pagination Controls */}
           <View style={styles.paginationContainer}>
             <TouchableOpacity
               style={[styles.paginationButton, currentPage === 1 && styles.disabledButton]}
@@ -142,7 +135,7 @@ const ApplicationsScreen = () => {
           </View>
         </>
       )}
-    </LinearGradient>
+    </View>
   );
 };
 
@@ -153,32 +146,34 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     paddingTop: 40,
+    backgroundColor: "#FFFFFF",
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "#FACC15",
+    color: "#D17A47",
     marginBottom: 15,
     textAlign: "center",
   },
   searchInput: {
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    backgroundColor: "#F0F0F0",
     padding: 10,
     borderRadius: 10,
     marginBottom: 15,
-    color: "#fff",
+    color: "#333",
     fontSize: 16,
-
+    borderWidth: 1,
+    borderColor: '#D17A47',
   },
   row: {
     flexDirection: "row",
     paddingVertical: 12,
     paddingHorizontal: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255, 255, 255, 0.2)",
+    borderBottomColor: "#E0E0E0",
   },
   header: {
-    backgroundColor: "#1E293B",
+    backgroundColor: "#D17A47",
     borderRadius: 10,
     paddingVertical: 15,
     marginBottom: 5,
@@ -187,19 +182,19 @@ const styles = StyleSheet.create({
     width: 100,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#FACC15",
+    color: "#FFFFFF",
   },
   cell: {
     width: 100,
     textAlign: "center",
-    color: "#fff",
+    color: "#333",
     fontSize: 14,
   },
   evenRow: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#F9F9F9",
   },
   oddRow: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    backgroundColor: "#FFFFFF",
   },
   loadingContainer: {
     flex: 1,
@@ -213,7 +208,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   paginationButton: {
-    backgroundColor: "#FACC15",
+    backgroundColor: "#D17A47",
     paddingVertical: 8,
     paddingHorizontal: 15,
     borderRadius: 8,
@@ -222,13 +217,13 @@ const styles = StyleSheet.create({
   paginationText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#1F3B8C",
+    color: "#FFFFFF",
   },
   pageNumber: {
     fontSize: 16,
-    color: "#FACC15",
+    color: "#D17A47",
   },
   disabledButton: {
-    backgroundColor: "gray",
+    backgroundColor: "#CCC",
   },
 });

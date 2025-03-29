@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import React, { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import { LinearGradient } from "expo-linear-gradient";
 
 const CampusVisitScreen = () => {
   const [students, setStudents] = useState([]);
@@ -32,7 +31,6 @@ const CampusVisitScreen = () => {
       });
   }, []);
 
-  // Memoized search filter
   const filteredQueries = useMemo(() => {
     return students.filter((query) =>
       Object.values(query)
@@ -42,7 +40,6 @@ const CampusVisitScreen = () => {
     );
   }, [searchText, students]);
 
-  // Memoized pagination
   const paginatedData = useMemo(() => {
     return filteredQueries.slice(
       (currentPage - 1) * itemsPerPage,
@@ -53,13 +50,13 @@ const CampusVisitScreen = () => {
   const totalPages = Math.ceil(filteredQueries.length / itemsPerPage);
 
   return (
-    <LinearGradient colors={["#0F172A", "#1E293B"]} style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Campus Visit</Text>
 
       <TextInput
         style={styles.searchInput}
         placeholder="Search"
-        placeholderTextColor="#ccc"
+        placeholderTextColor="#777"
         value={searchText}
         onChangeText={(text) => {
           setSearchText(text);
@@ -69,14 +66,13 @@ const CampusVisitScreen = () => {
 
       {loading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#FACC15" />
+          <ActivityIndicator size="large" color="#D17A47" />
         </View>
       ) : (
         <ScrollView horizontal>
           <View>
-            {/* Table Header */}
             <View style={[styles.row, styles.header]}>
-              {["Student Name", "Email", "Mobile", "Scheduled Date", "Scheduled Time", "Number of Guests"].map(
+              {["Applicant Name", "Email", "Mobile", "Scheduled Date", "Scheduled Time", "Number of Guests"].map(
                 (header, index) => (
                   <Text key={index} style={styles.headerText}>
                     {header}
@@ -85,7 +81,6 @@ const CampusVisitScreen = () => {
               )}
             </View>
 
-            {/* Table Data */}
             <FlatList
               data={paginatedData}
               keyExtractor={(item, index) => index.toString()}
@@ -138,7 +133,7 @@ const CampusVisitScreen = () => {
           </TouchableOpacity>
         </View>
       )}
-    </LinearGradient>
+    </View>
   );
 };
 
@@ -149,11 +144,12 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     paddingTop: 40,
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "#FACC15",
+    color: "#D17A47",
     marginBottom: 15,
     textAlign: "center",
   },
@@ -162,31 +158,31 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255, 255, 255, 0.2)",
+    borderBottomColor: "#ddd",
   },
   header: {
-    backgroundColor: "#1E293B",
+    backgroundColor: "#D17A47",
     borderRadius: 10,
     paddingVertical: 15,
-    marginBottom:5
+    marginBottom: 5,
   },
   headerText: {
     width: 120,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#FACC15",
+    color: "#fff",
   },
   cell: {
     width: 120,
     textAlign: "center",
-    color: "#fff",
+    color: "#333",
     fontSize: 14,
   },
   evenRow: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#f9f9f9",
   },
   oddRow: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    backgroundColor: "#fff",
   },
   loadingContainer: {
     flex: 1,
@@ -200,7 +196,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   paginationButton: {
-    backgroundColor: "#FACC15",
+    backgroundColor: "#D17A47",
     paddingVertical: 8,
     paddingHorizontal: 15,
     borderRadius: 8,
@@ -209,22 +205,24 @@ const styles = StyleSheet.create({
   paginationText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#1F3B8C",
+    color: "#fff",
   },
   pageNumber: {
     fontSize: 16,
-    color: "#FACC15",
+    color: "#D17A47",
   },
   disabledButton: {
     backgroundColor: "gray",
     opacity: 0.6,
   },
   searchInput: {
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    backgroundColor: "#eee",
     padding: 10,
     borderRadius: 10,
     marginBottom: 15,
-    color: "#fff",
+    color: "#333",
     fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#D17A47',
   },
 });

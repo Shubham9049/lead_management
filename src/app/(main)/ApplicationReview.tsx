@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import React, { useState } from 'react';
 import axios from 'axios';
-import { LinearGradient } from 'expo-linear-gradient';
 
 const ApplicationReviewScreen = () => {
   const [applicationNumber, setApplicationNumber] = useState('');
@@ -33,34 +32,28 @@ const ApplicationReviewScreen = () => {
   };
 
   return (
-    <LinearGradient colors={["#0F172A", "#1E293B"]} style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Application Review</Text>
 
-      {/* Input Field */}
       <TextInput
         style={styles.input}
         placeholder="Enter Application Number"
-        placeholderTextColor="#ccc"
+        placeholderTextColor="#666"
         value={applicationNumber}
         onChangeText={setApplicationNumber}
       />
 
-      {/* Fetch Button */}
       <TouchableOpacity style={styles.button} onPress={fetchApplicationData}>
         <Text style={styles.buttonText}>Fetch Application</Text>
       </TouchableOpacity>
 
-      {/* Loading Indicator */}
-      {loading && <ActivityIndicator size="large" color="#FACC15" style={styles.loader} />}
-
-      {/* Error Message */}
+      {loading && <ActivityIndicator size="large" color="#D17A47" style={styles.loader} />}
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
-      {/* Application Data */}
       {applicationData && (
         <View style={styles.card}>
           <Text style={styles.cardTitle}>Application Details</Text>
-          {[
+          {[ 
             { label: 'ID', key: 'Student ID' },
             { label: 'Name', key: 'Student Name' },
             { label: 'Email', key: 'Email' },
@@ -77,7 +70,7 @@ const ApplicationReviewScreen = () => {
           ))}
         </View>
       )}
-    </LinearGradient>
+    </View>
   );
 };
 
@@ -86,26 +79,29 @@ export default ApplicationReviewScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
     padding: 15,
     paddingTop: 40,
   },
   title: {
     fontSize: 22,
     fontWeight: 'bold',
-    color: '#FACC15',
+    color: '#D17A47',
     marginBottom: 15,
     textAlign: 'center',
   },
   input: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: '#F5F5F5',
     padding: 10,
     borderRadius: 10,
     marginBottom: 15,
-    color: '#fff',
+    color: '#333',
     fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#D17A47',
   },
   button: {
-    backgroundColor: '#FACC15',
+    backgroundColor: '#D17A47',
     paddingVertical: 10,
     borderRadius: 8,
     alignItems: 'center',
@@ -114,36 +110,38 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#1F3B8C',
+    color: '#FFFFFF',
   },
   loader: {
     marginVertical: 15,
   },
   errorText: {
-    color: '#ff6b6b',
+    color: '#D9534F',
     fontSize: 14,
     textAlign: 'center',
     marginBottom: 10,
   },
   card: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: '#FAFAFA',
     padding: 15,
     borderRadius: 10,
     marginTop: 15,
+    borderWidth: 1,
+    borderColor: '#D17A47',
   },
   cardTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#FACC15',
+    color: '#D17A47',
     marginBottom: 10,
   },
   cardText: {
     fontSize: 14,
-    color: '#fff',
+    color: '#333',
     marginBottom: 5,
   },
   label: {
     fontWeight: 'bold',
-    color: '#FACC15',
+    color: '#D17A47',
   },
 });

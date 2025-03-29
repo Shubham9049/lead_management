@@ -18,25 +18,56 @@ const RootNavigation = () => {
   const [hasToken, setHasToken] = useState<boolean | null>(null);
 
   async function registerForPushNotificationsAsync() {
-    let token;
-    if (Device.isDevice) {
+    try {
+      let token;
+      if (!Device.isDevice) {
+        alert("Must use a physical device for push notifications");
+        return;
+      }
+  
       const { status: existingStatus } = await Notifications.getPermissionsAsync();
       let finalStatus = existingStatus;
+  
       if (existingStatus !== "granted") {
         const { status } = await Notifications.requestPermissionsAsync();
         finalStatus = status;
       }
+  
       if (finalStatus !== "granted") {
         alert("Failed to get push token for push notification!");
         return;
       }
+  
       token = (await Notifications.getExpoPushTokenAsync()).data;
-      console.log("Push Token:", token);
-    } else {
-      alert("Must use physical device for push notifications");
+      console.log("Expo Push Token:", token);
+          // Send token to your API
+          // Extract only the actual token part
+    // const extractedToken = token.replace("ExponentPushToken[", "").replace("]", "");
+    // console.log("Extracted Token:", extractedToken);
+       await saveTokenToDatabase(token);
+    } catch (error) {
+      console.error("Error getting push token:", error);
     }
-    return token;
   }
+
+  // Function to send the token to your API
+async function saveTokenToDatabase(token: string) {
+  try {
+    const response = await fetch("https://app.bigwigmedia.in/TockenApi.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ tocken_number: token }),
+    });
+
+    const data = await response.json();
+    console.log("Token saved response:", data);
+  } catch (error) {
+    console.error("Error saving token to database:", error);
+  }
+}
+  
   useEffect(() => {
     registerForPushNotificationsAsync()
   }, []);

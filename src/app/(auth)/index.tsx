@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   backgroundImage: {
     width: "100%",
-    height: "68%",
+    height: height*0.72,
     // resizeMode: "cover",
   },
   contentContainer: {
@@ -66,8 +66,8 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: "100%",
     backgroundColor: "white",
-    borderTopLeftRadius: 40,
-    borderTopRightRadius: 40,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
     padding: 25,
     alignItems: "center",
     elevation: 5, // Shadow effect

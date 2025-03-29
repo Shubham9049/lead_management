@@ -52,20 +52,20 @@ const UsersScreen = () => {
   );
 
   return (
-    <LinearGradient colors={["#0F172A", "#1E293B"]} style={styles.container}>
+    <View style={styles.container}>
       <Text style={styles.title}>Users</Text>
 
       <TextInput
         style={styles.searchInput}
         placeholder="Search"
-        placeholderTextColor="#ccc"
+        placeholderTextColor="#666"
         value={searchText}
         onChangeText={setSearchText}
       />
 
       {loading ? (
         <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#FACC15" />
+          <ActivityIndicator size="large" color="#D17A47" />
         </View>
       ) : (
         <ScrollView horizontal>
@@ -114,7 +114,7 @@ const UsersScreen = () => {
           <Text style={styles.paginationText}>Next</Text>
         </TouchableOpacity>
       </View>
-    </LinearGradient>
+    </View>
   );
 };
 
@@ -123,13 +123,14 @@ export default UsersScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
     padding: 15,
     paddingTop: 40,
   },
   title: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "#FACC15",
+    color: "#D17A47",
     marginBottom: 15,
     textAlign: "center",
   },
@@ -138,31 +139,31 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "rgba(255, 255, 255, 0.2)",
+    borderBottomColor: "#ddd",
   },
   header: {
-    backgroundColor: "#1E293B",
+    backgroundColor: "#D17A47",
     borderRadius: 10,
     paddingVertical: 15,
-    marginBottom:5
+    marginBottom: 5,
   },
   headerText: {
     width: 150,
     fontWeight: "bold",
     textAlign: "center",
-    color: "#FACC15",
+    color: "#fff",
   },
   cell: {
     width: 150,
     textAlign: "center",
-    color: "#fff",
+    color: "#333",
     fontSize: 14,
   },
   evenRow: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
+    backgroundColor: "#F5F5F5",
   },
   oddRow: {
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
+    backgroundColor: "#EAEAEA",
   },
   loadingContainer: {
     flex: 1,
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   paginationButton: {
-    backgroundColor: "#FACC15",
+    backgroundColor: "#D17A47",
     paddingVertical: 8,
     paddingHorizontal: 15,
     borderRadius: 8,
@@ -184,21 +185,23 @@ const styles = StyleSheet.create({
   paginationText: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#1F3B8C",
+    color: "#fff",
   },
   pageNumber: {
     fontSize: 16,
-    color: "#FACC15",
+    color: "#D17A47",
   },
   disabledButton: {
     backgroundColor: "gray",
   },
   searchInput: {
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    backgroundColor: "#F5F5F5",
     padding: 10,
     borderRadius: 10,
     marginBottom: 15,
-    color: "#fff",
+    color: "#333",
     fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#D17A47',
   },
 });
